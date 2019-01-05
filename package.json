@@ -1,0 +1,20 @@
+{
+  "name": "gatsby-remark-video",
+  "version": "1.2.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "remark",
+    "video"
+  ],
+  "author": "Taher",
+  "license": "MIT",
+  "dependencies": {
+    "unist-util-visit": "^1.4.0"
+  }
+}
