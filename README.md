@@ -1,6 +1,6 @@
 ## gatsby-remark-video
 
-Embeds video tag
+Embeds video tag in your gatsby project
 
 ## Installation
 ```
