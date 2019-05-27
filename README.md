@@ -23,7 +23,8 @@ Add the following in your `gatsby-config.js`
 		height: 'auto',
 		preload: 'auto',
 		muted: true,
-		autoplay: true
+		autoplay: true,
+		loop: true
 	}
 }
 ```
