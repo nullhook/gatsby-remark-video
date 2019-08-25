@@ -24,6 +24,7 @@ Add the following in your `gatsby-config.js`
 		preload: 'auto',
 		muted: true,
 		autoplay: true,
+		controls: true,
 		loop: true
 	}
 }
