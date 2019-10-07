@@ -1,4 +1,5 @@
 const visit = require('unist-util-visit');
+const regFileExtension = /(?:\.([^.]+))?$/;
 
 const addVideo = ({ markdownAST }, options) => {
   
@@ -7,20 +8,19 @@ const addVideo = ({ markdownAST }, options) => {
     const matches = value.match(/video:?\s(.*)+/i);
 
     if(matches) {
-      const url = matches[1].trim();
+	  const url = matches[1].trim();
+	  const sources = url.split('|')
+	  const sourceTags = renderVideoSources(sources)
 
       node.type = 'html';
-      node.value = renderVideoTag(url, options);
+      node.value = renderVideoTag(sourceTags, options);
     }
   });
-
 };
 
-const renderVideoTag = (url, options) => {
-
+const renderVideoTag = (sourceTags, options) => {
   const videoNode = `
 		<video
-			src=${url}
 			width="${options.width}"
 			height="${options.height}"
 			preload="${options.preload}"
@@ -28,10 +28,24 @@ const renderVideoTag = (url, options) => {
 			${options.autoplay ? 'autoplay' : ''}
 			${options.controls ? 'controls' : ''}
 			${options.loop ? 'loop' : ''}
-		></video>
+		>
+		${sourceTags.join('')}
+		</video>
 	`;
 
   return videoNode;
+};
+
+const renderVideoSources = sources => {
+  const sourceTags = sources.map(source => {
+    const extensionMatches = regFileExtension.exec(source);
+    const mimeType = getMimeType(extensionMatches[1]);
+    const mimeAttr = mimeType ? `type='video/${mimeType}'` : '';
+    const sourceTag = `<source src='${source}' ${mimeAttr}></source>`;
+
+    return sourceTag;
+  });
+  return sourceTags;
 };
 
 const getMimeType = extension => {
