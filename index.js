@@ -47,6 +47,7 @@ const renderVideoTag = (url, options) => {
 			muted="${options.muted}"
 			title="${options.title}"
 			${options.autoplay ? 'autoplay' : ''}
+			${options.playsinline ? 'playsinline' : ''}
 			${options.controls ? 'controls' : ''}
 			${options.loop ? 'loop' : ''}
 		></video>

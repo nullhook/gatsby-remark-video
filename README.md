@@ -36,6 +36,7 @@ Add the following in your `gatsby-config.js`
 		preload: 'auto',
 		muted: true,
 		autoplay: true,
+		playsinline: true,
 		controls: true,
 		loop: true
 	}
