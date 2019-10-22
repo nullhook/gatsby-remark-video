@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "bump": "npm version patch -m 'bump %s' && git push origin master && npm publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
