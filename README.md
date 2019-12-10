@@ -11,7 +11,17 @@ npm install gatsby-remark-video
 
 In your markdown
 ```
-`video: /static/shots-demo-369bfe714a6b8981ecfc743f7e7e7008.mp4`
+`video: /shots-demo-369bfe714a6b8981ecfc743f7e7e7008.mp4`
+```
+
+For adding multiple sources, ensure the urls are separated by the `|` character
+
+```
+`video: https://interactive-examples.mdn.mozilla.net/media/examples/flower.webm|https://interactive-examples.mdn.mozilla.net/media/examples/flower.mp4`
+```
+
+```
+`video: /flower.webm|/flower.mp4`
 ```
 
 You can also add a title to the video tag by adding it in your markdown

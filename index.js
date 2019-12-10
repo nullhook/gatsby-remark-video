@@ -1,4 +1,5 @@
 const visit = require('unist-util-visit');
+const regFileExtension = /(?:\.([^.]+))?$/;
 
 const matchRegExp = new RegExp(
 	// Look for a "video" and then possibly ':' and then a space
@@ -24,23 +25,22 @@ const addVideo = ({markdownAST}, options) => {
 
 		if (matches) {
 			const title = matches[1]; // May be null
-			const url = matches[2].trim();
+      const url = matches[2].trim();
+      const sources = url.split('|');
+      const sourceTags = renderVideoSources(sources);
 
 			node.type = 'html';
-			node.value = renderVideoTag(url, {
+			node.value = renderVideoTag(sourceTags, {
 				...options,
 				title: title || url
 			});
 		}
 	});
-
 };
 
-const renderVideoTag = (url, options) => {
-
-	const videoNode = `
+const renderVideoTag = (sourceTags, options) => {
+  const videoNode = `
 		<video
-			src=${url}
 			width="${options.width}"
 			height="${options.height}"
 			preload="${options.preload}"
@@ -50,10 +50,39 @@ const renderVideoTag = (url, options) => {
 			${options.playsinline ? 'playsinline' : ''}
 			${options.controls ? 'controls' : ''}
 			${options.loop ? 'loop' : ''}
-		></video>
+		>
+		${sourceTags.join('')}
+		</video>
 	`;
 
-	return videoNode;
+  return videoNode;
+};
+
+const renderVideoSources = sources => {
+  const sourceTags = sources.map(source => {
+    const extensionMatches = regFileExtension.exec(source);
+    const mimeType = getMimeType(extensionMatches[1]);
+    const mimeAttr = mimeType ? `type='video/${mimeType}'` : '';
+    const sourceTag = `<source src='${source}' ${mimeAttr}></source>`;
+
+    return sourceTag;
+  });
+  return sourceTags;
+};
+
+const getMimeType = extension => {
+  switch (extension) {
+    case 'mp4':
+      return 'mp4';
+    case 'ogg':
+      return 'ogg';
+    case 'ogv':
+      return 'ogg';
+    case 'webm':
+      return 'webm';
+    default:
+      return '';
+  }
 };
 
 module.exports = addVideo;
