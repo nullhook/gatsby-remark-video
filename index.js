@@ -50,6 +50,8 @@ const renderVideoTag = (url, options) => {
 			${options.playsinline ? 'playsinline' : ''}
 			${options.controls ? 'controls' : ''}
 			${options.loop ? 'loop' : ''}
+			${options.disablePictureInPicture ? 'disablePictureInPicture' : ''}
+			${options.disableDownload ? 'controlsList="nodownload"' : ''}
 		></video>
 	`;
 
