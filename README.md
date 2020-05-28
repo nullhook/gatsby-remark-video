@@ -38,7 +38,9 @@ Add the following in your `gatsby-config.js`
 		autoplay: true,
 		playsinline: true,
 		controls: true,
-		loop: true
+		loop: true,
+		disablePictureInPicture: true,
+		disableDownload: true,
 	}
 }
 ```
