@@ -26,7 +26,7 @@ You can also escape a double quote the way you might expect:
 `video: title: "Short \"demo\"": /static/shots-demo-369bfe714a6b8981ecfc743f7e7e7008.mp4`
 ```
  
-Add the following in your `gatsby-config.js`
+Add the following in your `gatsby-config.js` inside the `options.plugins` array of the `gatsby-transformer-remark` plugin definition
 ```javascript
 {
 	resolve: 'gatsby-remark-video',
