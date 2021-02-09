@@ -44,8 +44,8 @@ const renderVideoTag = (url, options) => {
 			width="${options.width}"
 			height="${options.height}"
 			preload="${options.preload}"
-			muted="${options.muted}"
 			title="${options.title}"
+			${options.muted ? 'muted' : ''}
 			${options.autoplay ? 'autoplay' : ''}
 			${options.playsinline ? 'playsinline' : ''}
 			${options.controls ? 'controls' : ''}
